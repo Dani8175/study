@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 로그인이 되어있다면? -->
+    <h1>게시판</h1>
+    안녕하세요, {{ user.username }}님! <a href="{% url 'logout' %}">로그아웃</a>
+    <p><a href="{% url 'article_create' %}">글 작성</a></p>
+    {% else %}
+    <a href="{% url 'login' %}">로그인</a>
+    <a href="{% url 'article_create' %}">글 작성</a>
+    {% endif %}
+    <ul>
+        <!-- 데이터를 불러오려면? -->
+        <li>
+            <h2>{{data.id}}.{{data.title}}</h2>
+            <h3>{{data.id_name}}</h3>
+            <p>{{data.content}}</p>
+            <p>{{data.created_at}}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+<script src="{% static '/js/script.js' %}" defer></script>
+
+</html>
